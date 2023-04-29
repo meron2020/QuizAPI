@@ -5,7 +5,7 @@ from api.resources.quiz import QuizList
 from datetime import timedelta
 from db import db
 from api.resources.user import User
-from flask_jwt import JWT
+#from flask_jwt import JWT
 from flask_cors import CORS
 from security import authenticate, identity
 from api.resources.auth import Auth
@@ -21,7 +21,7 @@ CORS(app)
 api = Api(app)
 
 
-jwt = JWT(app, authenticate, identity)
+#jwt = JWT(app, authenticate, identity)
 
 
 #

@@ -7,17 +7,15 @@ class QuestionDatabaseHandler:
     def __init__(self):
         self.answer_handler = AnswerDatabaseHandler()
 
-    def save_to_db(self, quiz_id, question, answer_dict):
+    def save_to_db(self, quiz_id, question, correct_answer, wrong_answers):
         try:
             question.save_to_db()
         except Exception as e:
             print(e)
         question_id = self.get_question_id(question.question, quiz_id)
-        for key, value in answer_dict.items():
-            if key == "correct answer":
-                self.answer_handler.save_to_db(value, question_id, True)
-            else:
-                self.answer_handler.save_to_db(value, question_id, False)
+        self.answer_handler.save_to_db(correct_answer, question_id, True)
+        for wrong_answer in wrong_answers:
+            self.answer_handler.save_to_db(wrong_answer, question_id, False)
 
     def get_question_id(self, question, quiz_id):
         question = Question.find_by_question_name(question=question, quiz_id=quiz_id)

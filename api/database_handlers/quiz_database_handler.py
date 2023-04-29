@@ -13,14 +13,9 @@ class QuizDatabaseHandler:
             question_number = "question_"+str(counter)
             question = question_dict[question_number]
             save_question = Question(question['question'], quiz_id)
-            self.question_handler.save_to_db(quiz_id, save_question, question['answers'])
+            self.question_handler.save_to_db(quiz_id, save_question, question['correctAnswer'], question['wrongAnswers'])
 
             counter += 1
-        return True
-
-    def save_question_to_db(self, question, answer_dict, quiz):
-        save_question = Question(question['question'], quiz.id)
-        self.question_handler.save_to_db(quiz.id, save_question, answer_dict)
         return True
 
     def get_quiz_id(self, quiz_name):
