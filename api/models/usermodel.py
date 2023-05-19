@@ -60,3 +60,8 @@ class UserModel(db.Model):
         quiz_scores = [int(i) for i in quiz_scores]
         average = user.quiz_average
         return {"user": username, "quizzes": quizzes, "quiz_scores": quiz_scores, "average": average}
+
+    @classmethod
+    def get_all_averages(cls):
+        averages = cls.query.with_entities(UserModel.username, UserModel.quiz_average)
+        print(averages)

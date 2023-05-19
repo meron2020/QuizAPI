@@ -43,3 +43,4 @@ class User(Resource):
         handler.update_user(data['percentage'], name)
 
         return {"message": "Stats updated."}, 201
+

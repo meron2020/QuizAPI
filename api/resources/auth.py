@@ -17,4 +17,4 @@ class Auth(Resource):
         if authenticated:
             return {'message': 'User authenticated successfully.'}, 201
         else:
-            return {'message': "Not authenticated"}
+            return {'message': "Not authenticated"}, 401

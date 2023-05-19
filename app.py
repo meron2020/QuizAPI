@@ -5,10 +5,10 @@ from api.resources.quiz import QuizList
 from datetime import timedelta
 from db import db
 from api.resources.user import User
-#from flask_jwt import JWT
 from flask_cors import CORS
-from security import authenticate, identity
+from security import authenticate
 from api.resources.auth import Auth
+from api.database_handlers.user_database_handler import UserDatabaseHandler
 
 app = Flask(__name__, static_url_path='', static_folder='frontend/build')
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///data.db'
@@ -45,3 +45,4 @@ api.add_resource(Auth, '/auth')
 
 if __name__ == '__main__':
     app.run(port=5000, debug=True)
+
