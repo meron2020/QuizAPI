@@ -63,5 +63,6 @@ class UserModel(db.Model):
 
     @classmethod
     def get_all_averages(cls):
-        averages = cls.query.with_entities(UserModel.username, UserModel.quiz_average)
-        print(averages)
+        averages = cls.query.with_entities(UserModel.username, UserModel.quiz_average).all()
+        averages.sort(key=lambda x: x[1])
+        return averages

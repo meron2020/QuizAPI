@@ -32,4 +32,4 @@ class UserDatabaseHandler:
 
     @classmethod
     def get_all_averages(cls):
-        UserModel.get_all_averages()
+        return UserModel.get_all_averages()
