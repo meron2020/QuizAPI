@@ -8,6 +8,7 @@ class QuizModel(db.Model):
     quiz_name = db.Column(db.String)
     user = db.Column(db.String)
     questions = db.relationship('Question', lazy='dynamic')
+    pictures = db.relationship('Picture', lazy='dynamic')
 
     def __init__(self, quiz_name, user):
         self.quiz_name = quiz_name
