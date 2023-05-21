@@ -10,4 +10,4 @@ class Scoring(Resource):
 
     def get(self):
         handler = UserDatabaseHandler()
-        return handler.get_all_averages()
+        return handler.get_all_averages(), 200
