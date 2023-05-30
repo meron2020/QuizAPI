@@ -29,11 +29,5 @@ class QuizModel(db.Model):
     def get_all_quizzes(cls):
         return cls.query.all()
 
-    def get_id(self):
-        return self.id
-
-    def delete_from_db(self):
-        db.session.delete(self)
-        db.session.commit()
 
 

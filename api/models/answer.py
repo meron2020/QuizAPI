@@ -26,7 +26,3 @@ class Answer(db.Model):
     @classmethod
     def get_correct_answer(cls, question_id):
         return cls.query.filter_by(question_id=question_id, correct=True).first()
-
-    def delete_from_db(self):
-        db.session.delete(self)
-        db.session.commit()
