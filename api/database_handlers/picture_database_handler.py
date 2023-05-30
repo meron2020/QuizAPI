@@ -12,4 +12,6 @@ class PictureDatabaseHandler:
 
     @classmethod
     def get_picture_by_quiz_name(cls, quiz_name):
-        return Picture.get_img_by_quiz_name(quiz_name)
+        picture = Picture.get_img_by_quiz_name(quiz_name)
+        return picture.img
+
