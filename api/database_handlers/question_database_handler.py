@@ -21,14 +21,6 @@ class QuestionDatabaseHandler:
         question = Question.find_by_question_name(question=question, quiz_id=quiz_id)
         return question.id
 
-    def delete_from_db(self, question_id):
-        question = Question.find_by_question_id(question_id)
-        self.answer_handler.delete_answers_from_db(question_id)
-        question.delete_from_db()
-
-    def retrieve_one_question(self, quiz_id, question_name):
-        return Question.find_by_question_name(question_name, quiz_id)
-
     def retrieve_from_db(self, quiz_name):
         return Question.find_by_quiz(quiz_name)
 
