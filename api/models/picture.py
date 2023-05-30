@@ -4,7 +4,7 @@ from db import db
 class Picture(db.Model):
     __tablename__ = 'pictures'
     id = db.Column(db.Integer, primary_key=True)
-    img = db.Column(db.Text, unique=True, nullable=False)
+    img = db.Column(db.String)
     quiz_name = db.Column(db.Integer, db.ForeignKey("quizzes.quiz_name"))
 
     def __init__(self, img, quiz_name):
