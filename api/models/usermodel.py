@@ -54,6 +54,21 @@ class UserModel(db.Model):
         quiz_scores = user.quiz_score.split(",")
         quiz_scores.remove('')
         quiz_scores = [int(i) for i in quiz_scores]
+        if len(quiz_scores) == 0:
+            return {"user": username, "quizzes": quizzes, "quiz_scores": quiz_scores, "average": user.quiz_average}
+
+        combined_list = list(zip(quizzes, quiz_scores))
+
+        # Sort the combined list based on the integers
+        sorted_list = sorted(combined_list, key=lambda x: x[1], reverse=True)
+
+        # Split the sorted list back into separate string and integer lists
+        sorted_quiz_list, sorted_scores = zip(*sorted_list)
+
+        quizzes, quiz_scores = list(sorted_quiz_list), list(sorted_scores)
+        if len(quizzes) >= 10:
+            quiz_scores = quiz_scores[:10]
+            quizzes = quizzes[:10]
         average = user.quiz_average
         return {"user": username, "quizzes": quizzes, "quiz_scores": quiz_scores, "average": average}
 
