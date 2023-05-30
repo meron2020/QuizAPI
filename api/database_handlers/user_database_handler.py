@@ -13,9 +13,6 @@ class UserDatabaseHandler:
     def get_by_id(cls, user_id):
         return UserModel.find_by_id(user_id)
 
-    def delete_from_db(self, user):
-        user.delete_to_db()
-
     @classmethod
     def update_user(cls, average, user):
         UserModel.update_average(average, user)

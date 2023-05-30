@@ -1,7 +1,7 @@
 from flask_restful import Resource, reqparse
+
 from api.database_handlers.quiz_database_handler import QuizDatabaseHandler
 from api.models.quiz import QuizModel
-from api.models.question_class import Question
 
 
 class Quiz(Resource):
@@ -18,21 +18,6 @@ class Quiz(Resource):
     parser.add_argument("question_dict",
                         type=dict,
                         required=False)
-
-    parser.add_argument("question_added",
-                        type=dict,
-                        required=False)
-
-    parser.add_argument("question_removed",
-                        type=str)
-
-    parser.add_argument("add_question",
-                        required=False,
-                        type=str)
-
-    parser.add_argument("remove_question",
-                        required=False,
-                        type=str)
 
     def __init__(self):
         self.handler = QuizDatabaseHandler()
@@ -64,32 +49,6 @@ class Quiz(Resource):
             return {"message": "An error occurred inserting the item."}, 500  # Internal Server Error
 
         return {"message": "Quiz created."}, 201
-
-    def delete(self, name):
-        quiz = self.handler.find_by_quiz_name(name)
-        if quiz:
-            self.handler.delete_quiz_from_db(name)
-            return {"message": "Quiz deleted."}
-
-        return {"message": "Quiz not found."}
-
-    def put(self, name):
-        data = Quiz.parser.parse_args()
-        quiz = self.handler.find_by_quiz_name(name)
-        if quiz:
-            if quiz.user == data['user']:
-                if data["add_question"] == "True":
-                    question = data["question_added"]
-                    save_question = Question(question['question'], quiz.id)
-
-                    self.handler.add_question(save_question, question['answers'], quiz.id)
-                    return {"message": "Question added to {}".format(name)}
-                elif data["remove_question"] == "True":
-                    question = data['question_removed']
-                    self.handler.delete_question(question, quiz.id)
-                    return {"message": "Question deleted."}
-            else:
-                return {"message": "You do not have permission to change this quiz."}
 
 
 class QuizList(Resource):

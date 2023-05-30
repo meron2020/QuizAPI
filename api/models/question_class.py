@@ -18,20 +18,12 @@ class Question(db.Model):
         db.session.commit()
 
     @classmethod
-    def find_by_question_id(cls, question_id):
-        return cls.query.filter_by(id=question_id).first()
-
-    @classmethod
     def find_by_question_name(cls, question, quiz_id):
         return cls.query.filter_by(question=question, quiz_id=quiz_id).first()
 
     @classmethod
     def find_by_quiz(cls, quiz_id):
         return cls.query.filter_by(quiz_id=quiz_id).all()
-
-    def delete_from_db(self):
-        db.session.delete(self)
-        db.session.commit()
 
 
 
