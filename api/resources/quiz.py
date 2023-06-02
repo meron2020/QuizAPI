@@ -30,7 +30,7 @@ class Quiz(Resource):
         except Exception as e:
             print(e)
 
-        return {"message": "Quiz not found."}, 200
+        return {"message": "Quiz not found."}, 400
 
     def post(self, name):
         if self.handler.find_by_quiz_name(name):
@@ -55,7 +55,3 @@ class QuizList(Resource):
     def get(self):
         return {'quizzes': list(map(lambda x: x.quiz_name, QuizDatabaseHandler.get_all_quizzes()))}
 
-
-class checker(Resource):
-    def get(self):
-        return {"message": "I'm alive"}
